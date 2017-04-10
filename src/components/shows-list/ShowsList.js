@@ -28,161 +28,195 @@ class ShowsList extends Component {
         gotArtists: false
     }
 
-    componentWillMount(){
+    // componentWillMount(){
         
-        // a holder for 'this', so it can be passed easily to callbacks with their own 'this'
-        var thisShowsList = this;
+    //     // a holder for 'this', so it can be passed easily to callbacks with their own 'this'
+    //     var thisShowsList = this;
 
-        // XMLHttpRequest for default pictures
-        var defaultsXhr = new XMLHttpRequest();
-        defaultsXhr.onreadystatechange = function(){            
-            if(defaultsXhr.responseText !== ''){
-                populateDefaultPics(defaultsXhr, thisShowsList);
-            }
-        };
-        defaultsXhr.open('GET', 
-                'http://showsaround.s3-website-eu-west-1.amazonaws.com/artists.json',
-                true);
-        defaultsXhr.send(null);
+    //     // XMLHttpRequest for default pictures
+    //     var defaultsXhr = new XMLHttpRequest();
+    //     defaultsXhr.onreadystatechange = function(){            
+    //         if(defaultsXhr.responseText !== ''){
+    //             populateDefaultPics(defaultsXhr, thisShowsList);
+    //         }
+    //     };
+    //     defaultsXhr.open('GET', 
+    //             'http://showsaround.s3-website-eu-west-1.amazonaws.com/artists.json',
+    //             true);
+    //     defaultsXhr.send(null);
 
         
-        // XMLHttpRequest for the shows
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(those){            
-            if(xhr.responseText !== ''){
-                showsStateChanged(thisShowsList);
-            }
-        };
-        xhr.open('GET', 
-                 'http://showsaround.s3-website-eu-west-1.amazonaws.com/shows.json',
-                 true);
-        xhr.send(null);
+    //     // XMLHttpRequest for the shows
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.onreadystatechange = function(those){            
+    //         if(xhr.responseText !== ''){
+    //             showsStateChanged(thisShowsList);
+    //         }
+    //     };
+    //     xhr.open('GET', 
+    //              'http://showsaround.s3-website-eu-west-1.amazonaws.com/shows.json',
+    //              true);
+    //     xhr.send(null);
 
-        // when shows request gets a result - activate this function
-        function showsStateChanged(that){
-            // TODO - add check if status === 0,
-            // and responseText is "no connection"
-            if(xhr.status === 200){
-                if(xhr.responseText){
+    //     // when shows request gets a result - activate this function
+    //     function showsStateChanged(that){
+    //         // TODO - add check if status === 0,
+    //         // and responseText is "no connection"
+    //         if(xhr.status === 200){
+    //             if(xhr.responseText){
                     
-                    // when finally got data in the request,
-                    // start manipulationg it to make into a real object
+    //                 // when finally got data in the request,
+    //                 // start manipulationg it to make into a real object
 
-                    // TODO - continue manipulating the data.
-                    // make it into an object containing only the shows that
-                    // needs to be shown - 
-                    // their date hasn't happened yet, and they have data
+    //                 // TODO - continue manipulating the data.
+    //                 // make it into an object containing only the shows that
+    //                 // needs to be shown - 
+    //                 // their date hasn't happened yet, and they have data
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    var rawShowsArray = xhr.responseText.replace(/updateShows/g, '');
+    //                 var rawShowsArray = xhr.responseText.replace(/updateShows/g, '');
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    rawShowsArray = rawShowsArray.replace(/\r?\n|\r/g, '');
+    //                 rawShowsArray = rawShowsArray.replace(/\r?\n|\r/g, '');
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    rawShowsArray = rawShowsArray.substring(1);
-                    rawShowsArray = rawShowsArray.slice(0, -2);
-                    // rawShowsArray = rawShowsArray.replace(/\\/g, '\\');
+    //                 rawShowsArray = rawShowsArray.substring(1);
+    //                 rawShowsArray = rawShowsArray.slice(0, -2);
+    //                 // rawShowsArray = rawShowsArray.replace(/\\/g, '\\');
                     
-                    // debugger;
+    //                 // debugger;
                     
                     
-                    var fullArray = JSON.parse(rawShowsArray);
-                    const now = new Date();
+    //                 var fullArray = JSON.parse(rawShowsArray);
+    //                 const now = new Date();
 
-                    onlyDataArray = fullArray.filter(function(show){
-                        return show.artist !== '';
-                    })
+    //                 onlyDataArray = fullArray.filter(function(show){
+    //                     return show.artist !== '';
+    //                 })
 
-                    filteredArray = fullArray.filter(findAfterToday.bind(null, now));
+    //                 filteredArray = fullArray.filter(findAfterToday.bind(null, now));
 
-                    that.setState({
-                        showsArray: filteredArray,
-                        gotShows: true
-                    });
-                }
-            }
-        }
+    //                 that.setState({
+    //                     showsArray: filteredArray,
+    //                     gotShows: true
+    //                 });
+    //             }
+    //         }
+    //     }
 
-        // this function is used to filter the shows list 
-        // for only shows that hasn't happened yet
-        function findAfterToday(now, show){
+    //     // this function is used to filter the shows list 
+    //     // for only shows that hasn't happened yet
+    //     function findAfterToday(now, show){
                         
-            const showDate = new Date(show.date);
+    //         const showDate = new Date(show.date);
             
-            // console.log('showDate: ' + showDate);
-            // console.log(showDate > now);
+    //         // console.log('showDate: ' + showDate);
+    //         // console.log(showDate > now);
         
-            if(show.date){
-                return showDate > now;
-            } else {
-                return false;
-            }
-        }
+    //         if(show.date){
+    //             return showDate > now;
+    //         } else {
+    //             return false;
+    //         }
+    //     }
 
-        // when default pictutes request gets a result - activate this function
-        function populateDefaultPics(result, that){
+    //     // when default pictutes request gets a result - activate this function
+    //     function populateDefaultPics(result, that){
     
-            if(result.status === 200){
-                if(result.responseText){
+    //         if(result.status === 200){
+    //             if(result.responseText){
                     
-                    // when finally got data in the request,
-                    // start manipulationg it to make into a real object
+    //                 // when finally got data in the request,
+    //                 // start manipulationg it to make into a real object
 
-                    // TODO - continue manipulating the data.
-                    // make it into an object containing only the shows that
-                    // needs to be shown - 
-                    // their date hasn't happened yet, and they have data
+    //                 // TODO - continue manipulating the data.
+    //                 // make it into an object containing only the shows that
+    //                 // needs to be shown - 
+    //                 // their date hasn't happened yet, and they have data
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    var rawShowsArray = result.responseText.replace(/updateArtists/g, '');
+    //                 var rawShowsArray = result.responseText.replace(/updateArtists/g, '');
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    rawShowsArray = rawShowsArray.replace(/\r?\n|\r/g, '');
+    //                 rawShowsArray = rawShowsArray.replace(/\r?\n|\r/g, '');
 
-                    // debugger;
+    //                 // debugger;
                     
-                    rawShowsArray = rawShowsArray.substring(1);
+    //                 rawShowsArray = rawShowsArray.substring(1);
                         
-                    // debugger;
+    //                 // debugger;
                         
-                    rawShowsArray = rawShowsArray.slice(0, -2);
+    //                 rawShowsArray = rawShowsArray.slice(0, -2);
                     
-                    // debugger;
+    //                 // debugger;
                     
-                    rawShowsArray = rawShowsArray.replace(/'/g, "`");
-                    rawShowsArray = rawShowsArray.replace(/\s\s+/g, ' ');
+    //                 rawShowsArray = rawShowsArray.replace(/'/g, "`");
+    //                 rawShowsArray = rawShowsArray.replace(/\s\s+/g, ' ');
                     
-                    debugger;
+    //                 debugger;
                     
-                    var j = 0;
-                    for (var i = 100; i < rawShowsArray.length; i += 100){
+    //                 var j = 0;
+    //                 for (var i = 100; i < rawShowsArray.length; i += 100){
                         
-                        debugger;
+    //                     debugger;
                         
-                        console.log(rawShowsArray.substr(j, i));
+    //                     console.log(rawShowsArray.substr(j, i));
 
-                        j = i;
-                    }
+    //                     j = i;
+    //                 }
 
-                    debugger;
+    //                 debugger;
                     
-                    var fullArray = JSON.parse(rawShowsArray);
+    //                 var fullArray = JSON.parse(rawShowsArray);
                     
-                    defaultPictures = fullArray;
-                    that.setState({
-                        defaultPictures: fullArray,
-                        gotArtists: true
-                    })
+    //                 defaultPictures = fullArray;
+    //                 that.setState({
+    //                     defaultPictures: fullArray,
+    //                     gotArtists: true
+    //                 })
                     
-                }
+    //             }
+    //         }
+    //     }
+    // }
+
+    componentWillMount(){
+
+        // this is how you parse jsonp!
+
+        fetch('http://showsaround.s3-website-eu-west-1.amazonaws.com/shows.json')
+        .then((response) => {
+            
+            debugger;
+            
+            return response.text();
+        })
+        .then((responseText) => {
+
+            debugger;
+
+            var updateShows = function(jsonpData){
+                return jsonpData;
             }
-        }
+
+            eval('var realData = ' + responseText);
+
+            console.log(realData);
+            debugger;
+            
+            alert('we now have data! - connect to rest of app')
+        })
+        .catch((error) => {
+            
+            debugger;
+            
+            console.error(error);
+        });
     }
 
     scrollDown() {
