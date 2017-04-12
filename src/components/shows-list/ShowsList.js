@@ -10,6 +10,7 @@ import showListStyles from './ShowsList-styles.js';
 // import custom components
 import Show from '../show/Show.js';
 import Header from '../header/header-component.js';
+import Independ from '../independance/independ-comp';
 
 // import helper components
 import ShowIf from '../../helper-components/show-if/ShowIf.js';
@@ -115,11 +116,10 @@ class ShowsList extends Component {
         return (
             <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
                 <ScrollView ref={view => this.view = view} >
+                    <Independ />
                     {theArray.map((show, idx) => {
 
                         let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
-
-                        debugger;
 
                         return (
                             <View key={`${show.artist} - ${show.date} - ${idx}`}>

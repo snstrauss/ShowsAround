@@ -28,14 +28,12 @@ function populateDefaultPics(data){
             // make it into an object containing only the shows that
             // needs to be shown - 
             // their date hasn't happened yet, and they have data
-            debugger;
             var rawShowsArray = xhr.responseText.replace(/updateArtists/g, '');
             rawShowsArray = rawShowsArray.substring(1);
             rawShowsArray = rawShowsArray.slice(0, -2);
             var fullArray = JSON.parse(rawShowsArray);
             
             defaultPictures = fullArray;
-            debugger;
             
         }
     }

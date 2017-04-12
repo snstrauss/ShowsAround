@@ -7,8 +7,6 @@ import EndItemStyles from './EndItem-styles.js';
 
 const { endItem } = EndItemStyles;
 
-// debugger;
-
 const EndItem = () => (
     <View style={endItem}>
     </View>
