@@ -17,35 +17,35 @@ class Header extends Component {
         bigLogoUri: ''
     }
 
-    componentWillMount(){
+    // componentWillMount(){
         
-        const fetchObj = {
-            url: 'http://showsaround.s3-website-eu-west-1.amazonaws.com/img/FinalLogo512px.png',
-            method: 'GET'
-        }
+    //     const fetchObj = {
+    //         url: 'http://showsaround.s3-website-eu-west-1.amazonaws.com/img/FinalLogo512px.png',
+    //         method: 'GET'
+    //     }
 
-        fetch(fetchObj)
-        .then(response => response.url)
-        .then(uri => {
+    //     fetch(fetchObj)
+    //     .then(response => response.url)
+    //     .then(uri => {
             
-            console.log('got big logo uri:');
-            console.log(uri);
+    //         console.log('got big logo uri:');
+    //         console.log(uri);
 
-            this.setState({
-                bigLogoUri: uri
-            })
-        })
-        .catch(err => {
+    //         this.setState({
+    //             bigLogoUri: uri
+    //         })
+    //     })
+    //     .catch(err => {
             
-            console.log('err');
-            console.log(err);
-        })
+    //         console.log('err');
+    //         console.log(err);
+    //     })
 
-    }
+    // }
     
     render(){
 
-        let imageUri = this.state.bigLogoUri;
+        let imageUri = 'http://showsaround.s3-website-eu-west-1.amazonaws.com/img/FinalLogo512px.png';
 
         const { headerContainer,
                 imageParentStyle, 
