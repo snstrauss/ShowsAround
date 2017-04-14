@@ -141,11 +141,7 @@ class ShowsList extends Component {
                 <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
                     <Button style={button}
                             onPress={() => navigate('Areas')}>
-                    <Image resizeMode="stretch" style={{height: 200}} source={require('../../assets/fireworks.jpg')}>
-                        <Text style={color:'hotpink'}
-                            what is this
-                        </Text>
-                    </Image>
+                        <Image resizeMode="stretch" style={{height: 200}} source={require('../../assets/fireworks.jpg')} />>
                         לאירועי יום העצמאות
                     </Button>
                     <ScrollView ref={view => this.view = view} >
