@@ -1,14 +1,47 @@
 
+import AppDimensions from '../../services/dimensions/Dimensions.js';
+// import { Dimensions } from 'react-native';
+
+const { width, height } = AppDimensions;
+
+debugger;
+
+
 const showListStyles = {
     borderWidth: 3,
     borderColor: 'red',
 
-    button: {
-        height: 60,
-        fontSize: 25,
-        color: 'red',
-        backgroundColor: 'blue'
+    navButton: {
+        borderWidth: 2,
+        borderColor: 'white',
+
+        height: 120,
+        // backgroundColor: 'blue'
     },
+
+    navImage: {
+        height: 116,
+        width: width - 4,
+    },
+
+    navTextView: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        height: 40,
+        position: 'absolute',
+        right: 0,
+        left: 0,
+        zIndex: 1,
+    },
+
+    navText: {
+        fontSize: 20,
+        color: 'gold',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        marginTop: 5,
+    },
+
+
 }
 
 export default showListStyles;

@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 
 // import react-native
-import { ScrollView, View, Text, Image } from 'react-native';
+import { ScrollView, View, Text, Image, TouchableHighlight } from 'react-native';
 import Button from 'react-native-button';
 
 // import stylesheet
 import showListStyles from './ShowsList-styles.js';
-const { button } = showListStyles;
+const { navButton, navImage, navTextView, navText } = showListStyles;
 
 // import custom components
 import Show from '../show/Show.js';
@@ -139,11 +139,16 @@ class ShowsList extends Component {
             <View>
                 <Header title="ShowsAround" />
                 <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
-                    <Button style={button}
-                            onPress={() => navigate('Areas')}>
-                        <Image resizeMode="stretch" style={{height: 200}} source={require('../../assets/fireworks.jpg')} />>
-                        לאירועי יום העצמאות
-                    </Button>
+                    <TouchableHighlight style={navButton} onPress={() => navigate('Areas')}>
+                        <View>
+                            <View style={navTextView}>
+                                <Text style={navText}>
+                                    לאירועי יום העצמאות
+                                </Text>
+                            </View>
+                            <Image resizeMode="stretch" style={navImage} source={require('../../assets/fireworks.jpg')} />
+                        </View>
+                    </TouchableHighlight>
                     <ScrollView ref={view => this.view = view} >
                         {theArray.map((show, idx) => {
 
