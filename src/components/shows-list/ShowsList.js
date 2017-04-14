@@ -146,35 +146,30 @@ class ShowsList extends Component {
                                titleColor="gold"
                                imageSrc={require("../../assets/fireworks.jpg")}
                                onPress={this.goToAreas.bind(this)} />
-                    {/*<TouchableHighlight style={navButton} onPress={() => navigate('Areas')}>
-                        <View>
-                            <View style={navTextView}>
-                                <Text style={navText}>
-                                    לאירועי יום העצמאות
-                                </Text>
-                            </View>
-                            <Image resizeMode="stretch" style={navImage} source={require('../../assets/fireworks.jpg')} />
-                        </View>
-                    </TouchableHighlight>*/}
                     <ScrollView ref={view => this.view = view} >
                         {theArray.map((show, idx) => {
 
                             let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
-
+                            
                             return (
                                 <View key={`${show.artist} - ${show.date} - ${idx}`}>
                                     {/* 
                                         this will render before the first item, and will 
                                         serve as buffer before header    
                                     */}
-                                    <ShowIf condition={idx === 0}>
+                                    {/*<ShowIf condition={idx === 0}>
                                         <View style={{borderTopWidth: 2, borderColor: Color.getRandom()}}></View>
-                                    </ShowIf>
+                                    </ShowIf>*/}
                                     
                                     {/* 
                                         this is the actual item
                                     */}
-                                    <Show key={show.artist + idx} idx={idx} isLast={idx === theArray.length - 1} show={show} artist={thisArtist} parent={this}></Show>
+                                    <Show key={show.artist + idx} 
+                                          idx={idx} 
+                                          isLast={idx === theArray.length - 1} 
+                                          show={show} 
+                                          artist={thisArtist} 
+                                          parent={this} />
 
                                     {/* 
                                         this will render after the last item, and will be used 
