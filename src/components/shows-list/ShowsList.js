@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 
 // import react-native
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Image } from 'react-native';
+import Button from 'react-native-button';
 
 // import stylesheet
 import showListStyles from './ShowsList-styles.js';
+const { button } = showListStyles;
 
 // import custom components
 import Show from '../show/Show.js';
@@ -22,11 +24,21 @@ import Color from '../../services/random-color/randomColor.js';
 
 class ShowsList extends Component {
     
+    static navigationOptions = {
+        // header: {
+        //     visible: false
+        // }
+        headerVisible: false
+    }
+
     state = {
         showsArray: [],
         gotShows: false,
+        
         defaultPictures: {},
-        gotArtists: false
+        gotArtists: false,
+        
+        independShows: []
     }
 
 
@@ -64,6 +76,9 @@ class ShowsList extends Component {
             var onlyData = fullJson.filter((show) => {
                 return (show.artist !== '');
             })
+            
+            console.info('only data!');
+            console.info(onlyData);
 
             var now = new Date();
 
@@ -73,22 +88,27 @@ class ShowsList extends Component {
                 
                 const showDate = new Date(show.date);
 
-                if(show.date){
-                    return (showDate.getFullYear() >= now.getFullYear() && 
-                            showDate.getMonth() >= now.getMonth() && 
-                            showDate.getDate() >= now.getDate()
-                            );
-                } else {
-                    return false;
-                }
+                return ((showDate > now) && (!show.area.includes('עצמאות')));
             }
 
-            console.log(onlyAfterToday);
+            var onlyIndepend = fullJson.filter(findIndepend);
+
+            function findIndepend(show){
+                return show.area.includes('עצמאות');
+            }
+
+            console.info('only after today!');
+            console.info(onlyAfterToday);
             console.log('');
+            console.info('only independance');
+            console.info(onlyIndepend);
+            console.log('');
+
 
             this.setState({
                 showsArray: onlyAfterToday,
-                gotShows: true
+                gotShows: true,
+                independShows: onlyIndepend
             })
         })
 
@@ -113,43 +133,56 @@ class ShowsList extends Component {
             image: 'https://www.chicagoentertainmentagency.com/blog/wp-content/uploads/2014/02/Live-Music.jpg'
         }
 
+        const { navigate } = this.props.navigation;
+        
         return (
-            <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
-                <ScrollView ref={view => this.view = view} >
-                    <Independ />
-                    {theArray.map((show, idx) => {
+            <View>
+                <Header title="ShowsAround" />
+                <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
+                    <Button style={button}
+                            onPress={() => navigate('Areas')}>
+                    <Image resizeMode="stretch" style={{height: 200}} source={require('../../assets/fireworks.jpg')}>
+                        <Text style={color:'hotpink'}
+                            what is this
+                        </Text>
+                    </Image>
+                        לאירועי יום העצמאות
+                    </Button>
+                    <ScrollView ref={view => this.view = view} >
+                        {theArray.map((show, idx) => {
 
-                        let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
+                            let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
 
-                        return (
-                            <View key={`${show.artist} - ${show.date} - ${idx}`}>
-                                {/* 
-                                    this will render before the first item, and will 
-                                    serve as buffer before header    
-                                 */}
-                                <ShowIf condition={idx === 0}>
-                                    <View style={{borderTopWidth: 2, borderColor: Color.getRandom()}}></View>
-                                </ShowIf>
-                                
-                                {/* 
-                                    this is the actual item
-                                 */}
-                                <Show key={show.artist + idx} idx={idx} isLast={idx === theArray.length - 1} show={show} artist={thisArtist} parent={this}></Show>
+                            return (
+                                <View key={`${show.artist} - ${show.date} - ${idx}`}>
+                                    {/* 
+                                        this will render before the first item, and will 
+                                        serve as buffer before header    
+                                    */}
+                                    <ShowIf condition={idx === 0}>
+                                        <View style={{borderTopWidth: 2, borderColor: Color.getRandom()}}></View>
+                                    </ShowIf>
+                                    
+                                    {/* 
+                                        this is the actual item
+                                    */}
+                                    <Show key={show.artist + idx} idx={idx} isLast={idx === theArray.length - 1} show={show} artist={thisArtist} parent={this}></Show>
 
-                                {/* 
-                                    this will render after the last item, and will be used 
-                                    as a buffer for the ScrollView glitch
-                                    (the actual last item will be fully visible)    
-                                 */}
-                                <ShowIf condition={idx === theArray.length - 1}>
-                                    <EndItem></EndItem>
-                                </ShowIf>
+                                    {/* 
+                                        this will render after the last item, and will be used 
+                                        as a buffer for the ScrollView glitch
+                                        (the actual last item will be fully visible)    
+                                    */}
+                                    <ShowIf condition={idx === theArray.length - 1}>
+                                        <EndItem></EndItem>
+                                    </ShowIf>
 
-                            </View>
-                        )
-                    })}
-                </ScrollView>
-            </ShowIf>
+                                </View>
+                            )
+                        })}
+                    </ScrollView>
+                </ShowIf>
+            </View>
         )
     }
 };

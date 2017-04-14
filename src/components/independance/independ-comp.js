@@ -9,9 +9,6 @@ const { view, text } = IndependStyles;
 class Independ extends Component {
 
     wasPressed(){
-        
-        debugger;
-
         alert('independ was pressed');
     }
 
@@ -20,7 +17,7 @@ class Independ extends Component {
         return (
             <TouchableHighlight style={view} onPress={this.wasPressed.bind(this)}>
                 <Text style={text}>
-                    this is Independ
+                    this is Independ button
                 </Text>
             </TouchableHighlight>
         )

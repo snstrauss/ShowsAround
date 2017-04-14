@@ -60,7 +60,9 @@ class Header extends Component {
                         <Image style={imageStyle} source={{uri: imageUri}} />
                     </View>
                     <View style={textParentStyle}>
-                        <Text style={textStyle}>ShowsAround</Text>
+                        <Text style={textStyle}>
+                            {this.props.title}
+                        </Text>
                     </View>
                 </View>
             </ShowIf>
