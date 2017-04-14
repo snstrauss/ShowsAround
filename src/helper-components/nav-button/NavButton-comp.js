@@ -1,17 +1,22 @@
 
 import React from 'react';
 
-import { TouchableHighlight, View, Text } from 'react-native';
+import { TouchableHighlight, View, Text, Image } from 'react-native';
 
 import NavButtonStyles from './NavButton-styles';
-const { view, text } = NavButtonStyles;
+const { navButton, navTextView, navText, navImage } = NavButtonStyles;
 
 const NavButton = (props) => (
-    <View>
-        <Text>
-            {this.props.children}
-        </Text>
-    </View>
+    <TouchableHighlight style={navButton} onPress={props.onPress}>
+        <View>
+            <View style={navTextView}>
+                <Text style={[navText, {color: props.titleColor}]}>
+                    {props.title}
+                </Text>
+            </View>
+            <Image resizeMode="stretch" style={navImage} source={props.imageSrc} />
+        </View>
+    </TouchableHighlight>
 );
 
 export default NavButton;

@@ -18,6 +18,7 @@ import Independ from '../independance/independ-comp';
 import ShowIf from '../../helper-components/show-if/ShowIf.js';
 import WaitMsg from '../../helper-components/wait-msg/WaitMsg.js';
 import EndItem from '../../helper-components/end-item/EndItem.js';
+import NavButton from '../../helper-components/nav-button/NavButton-comp';
 
 // import services
 import Color from '../../services/random-color/randomColor.js';
@@ -118,6 +119,10 @@ class ShowsList extends Component {
         setTimeout(() => { this.view.scrollToEnd(); }, 1)
     }
 
+    goToAreas(){
+        return this.props.navigation.navigate('Areas');
+    }
+
     render(){
 
         let theArray = [];
@@ -132,14 +137,16 @@ class ShowsList extends Component {
             genres: '',
             image: 'https://www.chicagoentertainmentagency.com/blog/wp-content/uploads/2014/02/Live-Music.jpg'
         }
-
-        const { navigate } = this.props.navigation;
         
         return (
             <View>
                 <Header title="ShowsAround" />
                 <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
-                    <TouchableHighlight style={navButton} onPress={() => navigate('Areas')}>
+                    <NavButton title="לאירועי יום העצמאות" 
+                               titleColor="gold"
+                               imageSrc={require("../../assets/fireworks.jpg")}
+                               onPress={this.goToAreas.bind(this)} />
+                    {/*<TouchableHighlight style={navButton} onPress={() => navigate('Areas')}>
                         <View>
                             <View style={navTextView}>
                                 <Text style={navText}>
@@ -148,7 +155,7 @@ class ShowsList extends Component {
                             </View>
                             <Image resizeMode="stretch" style={navImage} source={require('../../assets/fireworks.jpg')} />
                         </View>
-                    </TouchableHighlight>
+                    </TouchableHighlight>*/}
                     <ScrollView ref={view => this.view = view} >
                         {theArray.map((show, idx) => {
 
