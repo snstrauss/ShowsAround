@@ -212,9 +212,6 @@ class ShowsList extends Component {
                             self={this.refs.accord}
 
                             onChange={(idx) => {
-                                
-                                debugger;
-                                
                                 if (idx === theArray.length - 1){
                                     console.log(this.parentman.state.goDown());
                                 }

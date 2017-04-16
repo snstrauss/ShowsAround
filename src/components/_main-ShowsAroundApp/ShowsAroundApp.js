@@ -9,6 +9,7 @@ import { StackNavigator } from 'react-navigation';
 // import my own components
 import ShowsList from '../shows-list/ShowsList.js';
 import Areas from '../independance/areas/Areas-comp';
+import Cities from '../independance/cities/Cities-comp';
 
 //import stylesheet
 import mainStyle from './ShowsAroundApp-styles.js';
@@ -20,6 +21,9 @@ const ShowsAroundApp = StackNavigator({
     },
     Areas: {
         screen: Areas
+    },
+    Cities: {
+        screen: Cities
     }
 }, {
     headerMode: 'screen'
