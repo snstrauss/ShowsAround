@@ -131,7 +131,7 @@ class ShowsList extends Component {
     }
 
     goToAreas(){
-        return this.props.navigation.navigate('Areas');
+        return this.props.navigation.navigate('Areas', {stateData: this.state.independShows});
     }
 
     render(){
