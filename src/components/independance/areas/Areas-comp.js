@@ -50,12 +50,10 @@ class Areas extends Component {
     }
 
     goToCities(areaName){
-        
-        debugger;
-        
         this.props.navigation.navigate('Cities', { 
             areaName: areaName,  
-            allCitiesShows: this.state.allAreas[areaName] 
+            allCitiesShows: this.state.allAreas[areaName],
+            defaultPictures: this.props.navigation.state.params.defaultPictures
         });
     }
 

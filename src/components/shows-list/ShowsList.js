@@ -25,6 +25,7 @@ import ShowIf from '../../helper-components/show-if/ShowIf.js';
 import WaitMsg from '../../helper-components/wait-msg/WaitMsg.js';
 import EndItem from '../../helper-components/end-item/EndItem.js';
 import NavButton from '../../helper-components/nav-button/NavButton-comp';
+import OnlyShows from '../only-shows/OnlyShows-comp';
 
 // import services
 import Color from '../../services/random-color/randomColor.js';
@@ -124,14 +125,14 @@ class ShowsList extends Component {
     }
 
     scrollDown(idx) {
-        
-        debugger;
-        
         setTimeout(() => { this.view.scrollToEnd(); }, 1)
     }
 
     goToAreas(){
-        return this.props.navigation.navigate('Areas', {stateData: this.state.independShows});
+        return this.props.navigation.navigate('Areas', {
+            stateData: this.state.independShows,
+            defaultPictures: this.state.defaultPictures
+        });
     }
 
     render(){
@@ -152,10 +153,6 @@ class ShowsList extends Component {
         const self = this;
 
         function scrollToDown() {
-            
-
-            // debugger;
-            
             self.refs.scrolly.scrollToEnd();
             // setTimeout(() => { self.refs.scrolly.scrollToEnd(); }, 1)
         }
@@ -168,7 +165,9 @@ class ShowsList extends Component {
                                titleColor="gold"
                                imageSrc={require("../../assets/fireworks.jpg")}
                                onPress={this.goToAreas.bind(this)} />
-                    <ScrollView ref="scrolly">
+                    <OnlyShows showsToShow={this.state.showsArray} 
+                               defaultPictures={this.state.defaultPictures} />
+                    {/*<ScrollView ref="scrolly">
                         <Accordion
 
                             ref="accord"
@@ -218,7 +217,7 @@ class ShowsList extends Component {
                             }}>
                         </Accordion>
                         <EndItem></EndItem>
-                    </ScrollView>
+                    </ScrollView>*/}
                 </ShowIf>
             </View>
         )

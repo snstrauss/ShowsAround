@@ -23,8 +23,7 @@ class Cities extends Component {
     }
 
     componentWillMount() {
-        
-        debugger;
+
         let allCities = {};
         let allShows = this.props.navigation.state.params.allCitiesShows;
 
@@ -45,9 +44,11 @@ class Cities extends Component {
     }
 
     goToShowsInCity(cityName){
-
-
-        alert(cityName);
+        this.props.navigation.navigate('ShowsInCity', {
+            cityName: cityName,
+            showsInCity: this.state.allCities[cityName],
+            defaultPictures: this.props.navigation.state.params.defaultPictures
+        })
     }
 
     render(){
