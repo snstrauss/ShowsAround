@@ -5,14 +5,20 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, Image, TouchableHighlight } from 'react-native';
 import Button from 'react-native-button';
 
+import Accordion from 'react-native-collapsible/Accordion';
+
 // import stylesheet
 import showListStyles from './ShowsList-styles.js';
 const { navButton, navImage, navTextView, navText } = showListStyles;
+import ShowStyles from '../show/Show-styles';
 
 // import custom components
 import Show from '../show/Show.js';
 import Header from '../header/header-component.js';
 import Independ from '../independance/independ-comp';
+import ShowHeader from '../show/show-export/ShowHeader';
+import ShowContent from '../show/show-export/ShowContent';
+
 
 // import helper components
 import ShowIf from '../../helper-components/show-if/ShowIf.js';
@@ -39,7 +45,9 @@ class ShowsList extends Component {
         defaultPictures: {},
         gotArtists: false,
         
-        independShows: []
+        independShows: [],
+
+        goDown: this.scrollDown.bind(this)
     }
 
 
@@ -115,7 +123,10 @@ class ShowsList extends Component {
 
     }
 
-    scrollDown() {
+    scrollDown(idx) {
+        
+        debugger;
+        
         setTimeout(() => { this.view.scrollToEnd(); }, 1)
     }
 
@@ -137,7 +148,18 @@ class ShowsList extends Component {
             genres: '',
             image: 'https://www.chicagoentertainmentagency.com/blog/wp-content/uploads/2014/02/Live-Music.jpg'
         }
-        
+
+        const self = this;
+
+        function scrollToDown() {
+            
+
+            // debugger;
+            
+            self.refs.scrolly.scrollToEnd();
+            // setTimeout(() => { self.refs.scrolly.scrollToEnd(); }, 1)
+        }
+
         return (
             <View>
                 <Header title="ShowsAround" />
@@ -146,43 +168,59 @@ class ShowsList extends Component {
                                titleColor="gold"
                                imageSrc={require("../../assets/fireworks.jpg")}
                                onPress={this.goToAreas.bind(this)} />
-                    <ScrollView ref={view => this.view = view} >
-                        {theArray.map((show, idx) => {
+                    <ScrollView ref="scrolly">
+                        <Accordion
 
-                            let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
+                            ref="accord"
+
+                            sections={theArray}
+
+                            renderHeader={(show, idx) => {
+                                
+                                let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
+                                
+                                return (
+                                    <View>
+                                        <ShowHeader key={show.artist + idx} 
+                                            idx={idx} 
+                                            isLast={idx === theArray.length - 1} 
+                                            show={show} 
+                                            artist={thisArtist} 
+                                            parent={this} />
+                                    </View>
+                                )
+                            }}
+
+                            renderContent={(show, idx) => {
+                                
+                                let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
+                                
+                                return (
+                                    <View>
+                                        <ShowContent key={show.artist + idx} 
+                                            idx={idx} 
+                                            isLast={idx === theArray.length - 1} 
+                                            show={show} 
+                                            artist={thisArtist} 
+                                            parent={this} />
+                                    </View>
+                                )
+                            }}
                             
-                            return (
-                                <View key={`${show.artist} - ${show.date} - ${idx}`}>
-                                    {/* 
-                                        this will render before the first item, and will 
-                                        serve as buffer before header    
-                                    */}
-                                    {/*<ShowIf condition={idx === 0}>
-                                        <View style={{borderTopWidth: 2, borderColor: Color.getRandom()}}></View>
-                                    </ShowIf>*/}
-                                    
-                                    {/* 
-                                        this is the actual item
-                                    */}
-                                    <Show key={show.artist + idx} 
-                                          idx={idx} 
-                                          isLast={idx === theArray.length - 1} 
-                                          show={show} 
-                                          artist={thisArtist} 
-                                          parent={this} />
+                            parentman={self}
 
-                                    {/* 
-                                        this will render after the last item, and will be used 
-                                        as a buffer for the ScrollView glitch
-                                        (the actual last item will be fully visible)    
-                                    */}
-                                    <ShowIf condition={idx === theArray.length - 1}>
-                                        <EndItem></EndItem>
-                                    </ShowIf>
+                            self={this.refs.accord}
 
-                                </View>
-                            )
-                        })}
+                            onChange={(idx) => {
+                                
+                                debugger;
+                                
+                                if (idx === theArray.length - 1){
+                                    console.log(this.parentman.state.goDown());
+                                }
+                            }}>
+                        </Accordion>
+                        <EndItem></EndItem>
                     </ScrollView>
                 </ShowIf>
             </View>

@@ -7,15 +7,12 @@ import { View, Text, Image, TouchableHighlight, ScrollView, Animated } from 'rea
 import Accordion from 'react-native-accordion';
 
 // import stylesheet
-import ShowStyles from './Show-styles.js';
-
-// import helper components
-import ShowIf from '../../helper-components/show-if/ShowIf.js';
+import ShowStyles from '../Show-styles';
 
 // import services
-import Color from '../../services/random-color/randomColor.js';
+import Color from '../../../services/random-color/randomColor';
 
-class Show extends Component {
+class ShowContent extends Component {
     constructor() {
         super();
 
@@ -55,22 +52,14 @@ class Show extends Component {
         let thisPrice = eval(thisShow.price) ? thisShow.price : 'חינם';        
 
         return (
-        <View style={showBox}>  
-            <View style={textParent}>
-                <Text style={titleStyle}>{thisShow.artist}</Text>    
+            <View style={[detailsParent, {borderColor: this.state.borderColor}]}>
+                <Text style={detailsStyle}>{thisShow.details}</Text>
             </View>
-            <View style={[imageParent, {borderColor: this.state.borderColor}]}>
-                <Image resizeMode="stretch" style={{height: this.imageHeight}} source={{ uri: thisShowDefaultPicUri }}></Image>
-                <View style={priceParent}>
-                    <Text style={priceStyle}>{thisPrice}</Text>
-                </View>
-            </View>
-        </View>
         );
     }
 };
 
-export default Show;
+export default ShowContent;
 /*<TouchableHighlight onPress={this.toggleDetails.bind(this, this.props.idx)}>
     <View style={showBox}>  
         <View style={textParent}>

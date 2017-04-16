@@ -13,7 +13,7 @@ class Independ extends Component {
     }
 
     render(){
-        debugger;
+        
         return (
             <TouchableHighlight style={view} onPress={this.wasPressed.bind(this)}>
                 <Text style={text}>
