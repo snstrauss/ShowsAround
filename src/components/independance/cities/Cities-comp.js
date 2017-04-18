@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Platform } from 'react-native';
 
 import CitiesStyles from './Cities-styles';
 const { view, text } = CitiesStyles;
@@ -13,9 +13,12 @@ import NavButton from '../../../helper-components//nav-button/NavButton-comp';
 
 class Cities extends Component {
 
-    static navigationOptions = {
-        headerVisible: false
-    }
+    isIos = Platform.OS === 'ios';
+    
+    static navigationOptions = ({ navigation }) => ({
+        headerVisible: this.isIos,
+        title: navigation.state.params.areaName
+    })
 
     state = {
         allCities: {},
@@ -55,7 +58,10 @@ class Cities extends Component {
 
         return (
           <View>
-                <Header title={this.props.navigation.state.params.areaName} />
+                <ShowIf condition={!this.isIos}>
+                    <Header title={this.props.navigation.state.params.areaName} />
+                </ShowIf>
+    
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'}/>}>
                     <ScrollView>
                         {

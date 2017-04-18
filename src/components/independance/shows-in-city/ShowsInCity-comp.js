@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 
 import ShowsInCityStyles from './ShowsInCity-styles';
 const { view, text } = ShowsInCityStyles;
@@ -13,18 +13,18 @@ import OnlyShows from '../../only-shows/OnlyShows-comp';
 
 class ShowsInCity extends Component {
 
-    static navigationOptions = {
-        headerVisible: false
-    }
+    isIos = (Platform.OS === 'ios')
+
+    static navigationOptions = ({ navigation }) => ({
+        headerVisible: this.isIos,
+        title: navigation.state.params.cityName
+    })
 
     state = {
         gotShows: false
     }
 
     componentWillMount(){
-        
-        debugger;
-        
         if(this.props.navigation.state.params.showsInCity.length > 0){
             this.setState({
                 gotShows: true
@@ -36,7 +36,10 @@ class ShowsInCity extends Component {
 
         return (
             <View>
-                <Header title={this.props.navigation.state.params.cityName} />
+                <ShowIf condition={!this.isIos}>
+                    <Header title={this.props.navigation.state.params.cityName} />
+                </ShowIf>
+                
                 <ShowIf condition={this.state.gotShows} else={<WaitMsg msg={'please wait...'}/>}>
                    <OnlyShows showsToShow={this.props.navigation.state.params.showsInCity} 
                        defaultPictures={this.props.navigation.state.params.defaultPictures} /> 

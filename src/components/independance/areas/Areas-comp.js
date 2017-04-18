@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Platform } from 'react-native';
 
 import AreasStyles from './Areas-styles';
 const { view, text } = AreasStyles;
@@ -10,17 +10,31 @@ import Header from '../../header/header-component';
 import ShowIf from '../../../helper-components/show-if/ShowIf';
 import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import NavButton from '../../../helper-components/nav-button/NavButton-comp';
+import GoBack from '../buttons/goBack-comp';
 
 class Areas extends Component {
 
-    static navigationOptions = {
-        headerVisible: false
+    isIos = (Platform.OS === 'ios');
+
+    makeGoBack(){
+        
+        debugger;
+        console.log('this.props.navigation');
+        
     }
+
+    static navigationOptions = ({ navigation }) => ({
+        headerVisible: this.isIos,
+        title: 'כל האיזורים',
+        // headerRight: <GoBack title="אחורה" activate={this.makeGoBack.bind.this} />
+    })
 
     state = {
         allAreas: [],
         gotAreas: false
     }
+
+    
 
     componentWillMount(){
 
@@ -57,11 +71,22 @@ class Areas extends Component {
         });
     }
 
+    stam(){
+        
+        debugger;
+        
+        
+        this.props.navigation.goBack();
+    }
+
     render(){
+
+        const { goBack } = this.props.navigation;
 
         return (
             <View>
-                <Header title="כל האיזורים" />
+                <Header title="כל האיזורים" activate={this.stam.bind(this)} hasBack={true}/>    
+
                 <ShowIf condition={this.state.gotAreas} else={<WaitMsg msg={'please wait...'}/>}>
                     <ScrollView>
                         {

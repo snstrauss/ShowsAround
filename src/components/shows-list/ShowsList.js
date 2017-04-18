@@ -159,7 +159,7 @@ class ShowsList extends Component {
 
         return (
             <View>
-                <Header title="ShowsAround" />
+                <Header title="ShowsAround" hasBack={false} />
                 <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
                     <NavButton title="לאירועי יום העצמאות" 
                                titleColor="gold"

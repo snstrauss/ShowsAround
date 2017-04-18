@@ -14,12 +14,6 @@ import EndItem from '../../helper-components/end-item/EndItem';
 
 class OnlyShows extends Component {
 
-    componentWillMount(){
-        
-        debugger;
-        console.log(this.props.defaultPictures);
-    }
-
     render(){
 
         const defaultArtist = {

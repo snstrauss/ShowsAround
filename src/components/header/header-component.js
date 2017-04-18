@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // import react-native
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 
 // import stylesheet
 import headerStyles from './header-styles.js';
@@ -16,33 +16,14 @@ class Header extends Component {
     state = {
         bigLogoUri: ''
     }
-
-    // componentWillMount(){
-        
-    //     const fetchObj = {
-    //         url: 'http://showsaround.s3-website-eu-west-1.amazonaws.com/img/FinalLogo512px.png',
-    //         method: 'GET'
-    //     }
-
-    //     fetch(fetchObj)
-    //     .then(response => response.url)
-    //     .then(uri => {
-            
-    //         console.log('got big logo uri:');
-    //         console.log(uri);
-
-    //         this.setState({
-    //             bigLogoUri: uri
-    //         })
-    //     })
-    //     .catch(err => {
-            
-    //         console.log('err');
-    //         console.log(err);
-    //     })
-
-    // }
     
+    myFunc(){
+        
+        debugger;
+        this.props.activate();
+        
+    }
+
     render(){
 
         let imageUri = 'http://showsaround.s3-website-eu-west-1.amazonaws.com/img/FinalLogo512px.png';
@@ -65,6 +46,12 @@ class Header extends Component {
                         </Text>
                     </View>
                 </View>
+                <ShowIf condition={this.props.hasBack}>
+                    <View>
+                        <Button title="אחורה"
+                                onPress={this.myFunc.bind(this)}/>
+                    </View>
+                </ShowIf>
             </ShowIf>
         )
     }
