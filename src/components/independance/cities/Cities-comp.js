@@ -29,8 +29,6 @@ class Cities extends Component {
         let allCities = {};
         let allShows = this.props.navigation.state.params.allCitiesShows;
         
-        // debugger;
-        
         // create the allCities object
         allShows.forEach((show) => {
 
@@ -40,8 +38,6 @@ class Cities extends Component {
 
             allCities[show.location_eng].push(show);
         })
-        
-        // debugger;
         
         this.setState({
             allCities: allCities,
@@ -73,10 +69,7 @@ class Cities extends Component {
 
     render() {
         
-        
-        // debugger;
         const self = this;
-        
 
         return (
             <View>
@@ -88,8 +81,6 @@ class Cities extends Component {
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'} />}>
                     <ScrollView>
                         {Object.keys(this.state.allCities).map((cityName) => {
-                            
-                            debugger;
                             
                             if(Object.keys(self.state.allCities[cityName]).length > 1){
                                 return (
@@ -104,7 +95,7 @@ class Cities extends Component {
                                 return (
                                     <MultiShow key={`city-${cityName}`}
                                                shows={self.state.allCities[cityName]}
-                                               pics={self.makePicsArray(this.state.allCities[cityName])}/>
+                                               pics={this.makePicsArray(this.state.allCities[cityName])}/>
                                 )
                             }
 
