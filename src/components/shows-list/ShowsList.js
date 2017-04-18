@@ -106,15 +106,7 @@ class ShowsList extends Component {
             function findIndepend(show){
                 return show.area.includes('עצמאות');
             }
-
-            console.info('only after today!');
-            console.info(onlyAfterToday);
-            console.log('');
-            console.info('only independance');
-            console.info(onlyIndepend);
-            console.log('');
-
-
+            
             this.setState({
                 showsArray: onlyAfterToday,
                 gotShows: true,

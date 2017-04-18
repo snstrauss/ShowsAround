@@ -14,10 +14,7 @@ import NavButton from '../../../helper-components/nav-button/NavButton-comp';
 class Areas extends Component {
 
     makeGoBack(){
-        
-        debugger;
         console.log('this.props.navigation');
-        
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -37,7 +34,7 @@ class Areas extends Component {
 
         let allAreas = {};
         let allShows = this.props.navigation.state.params.stateData;
-
+        
         // create areas object
         allShows.forEach((show) => {
 

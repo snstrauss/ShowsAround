@@ -17,11 +17,8 @@ class Header extends Component {
         bigLogoUri: ''
     }
     
-    iWillGoBack(){
-        
-        debugger;
+    iWillGoBack(){        
         this.props.goBack();
-        
     }
 
     render(){
