@@ -17,10 +17,10 @@ class Header extends Component {
         bigLogoUri: ''
     }
     
-    myFunc(){
+    iWillGoBack(){
         
         debugger;
-        this.props.activate();
+        this.props.goBack();
         
     }
 
@@ -46,10 +46,10 @@ class Header extends Component {
                         </Text>
                     </View>
                 </View>
-                <ShowIf condition={this.props.hasBack}>
+                <ShowIf condition={this.props.goBack}>
                     <View>
                         <Button title="אחורה"
-                                onPress={this.myFunc.bind(this)}/>
+                                onPress={this.iWillGoBack.bind(this)}/>
                     </View>
                 </ShowIf>
             </ShowIf>

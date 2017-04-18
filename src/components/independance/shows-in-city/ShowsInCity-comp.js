@@ -13,10 +13,8 @@ import OnlyShows from '../../only-shows/OnlyShows-comp';
 
 class ShowsInCity extends Component {
 
-    isIos = (Platform.OS === 'ios')
-
     static navigationOptions = ({ navigation }) => ({
-        headerVisible: this.isIos,
+        headerVisible: false,
         title: navigation.state.params.cityName
     })
 
@@ -36,9 +34,8 @@ class ShowsInCity extends Component {
 
         return (
             <View>
-                <ShowIf condition={!this.isIos}>
-                    <Header title={this.props.navigation.state.params.cityName} />
-                </ShowIf>
+                <Header title={this.props.navigation.state.params.cityName} 
+                        goBack={this.props.navigation.goBack.bind(this)}/>
                 
                 <ShowIf condition={this.state.gotShows} else={<WaitMsg msg={'please wait...'}/>}>
                    <OnlyShows showsToShow={this.props.navigation.state.params.showsInCity} 

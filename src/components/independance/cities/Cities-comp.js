@@ -12,11 +12,9 @@ import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import NavButton from '../../../helper-components//nav-button/NavButton-comp';
 
 class Cities extends Component {
-
-    isIos = Platform.OS === 'ios';
     
     static navigationOptions = ({ navigation }) => ({
-        headerVisible: this.isIos,
+        headerVisible: false,
         title: navigation.state.params.areaName
     })
 
@@ -58,9 +56,10 @@ class Cities extends Component {
 
         return (
           <View>
-                <ShowIf condition={!this.isIos}>
-                    <Header title={this.props.navigation.state.params.areaName} />
-                </ShowIf>
+                
+                <Header title={this.props.navigation.state.params.areaName}
+                        goBack={this.props.navigation.goBack.bind(this)}/>
+                
     
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'}/>}>
                     <ScrollView>
