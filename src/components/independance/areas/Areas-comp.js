@@ -79,10 +79,11 @@ class Areas extends Component {
                         {
                             Object.keys(this.state.allAreas).map((areaName) => (
                                 <NavButton key={`area-${areaName}`}
-                                title={areaName} 
-                                titleColor="white"
-                                imageSrc={require("../../../assets/fireworks.jpg")}
-                                onPress={this.goToCities.bind(this, areaName)} />        
+                                           title={areaName} 
+                                           titleColor="white"
+                                           imageSrc={require("../../../assets/fireworks.jpg")}
+                                           defaultPics={this.props.defaultPics}
+                                           onPress={this.goToCities.bind(this, areaName)} />        
                             ))
                         }
                     </ScrollView>

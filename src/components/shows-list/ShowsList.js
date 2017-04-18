@@ -156,6 +156,7 @@ class ShowsList extends Component {
                     <NavButton title="לאירועי יום העצמאות" 
                                titleColor="gold"
                                imageSrc={require("../../assets/fireworks.jpg")}
+                               defaultPics={this.state.defaultPictures}
                                onPress={this.goToAreas.bind(this)} />
                     <OnlyShows showsToShow={this.state.showsArray} 
                                defaultPictures={this.state.defaultPictures} />

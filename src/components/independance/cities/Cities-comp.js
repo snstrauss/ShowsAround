@@ -29,7 +29,7 @@ class Cities extends Component {
         let allCities = {};
         let allShows = this.props.navigation.state.params.allCitiesShows;
         
-        debugger;
+        // debugger;
         
         // create the allCities object
         allShows.forEach((show) => {
@@ -41,12 +41,26 @@ class Cities extends Component {
             allCities[show.location_eng].push(show);
         })
         
-        debugger;
+        // debugger;
         
         this.setState({
             allCities: allCities,
             gotCities: true
         })
+    }
+
+    makePicsArray(stages){
+   
+        const defaultPics = this.props.navigation.state.params.defaultPictures;
+        const showsArr = stages[0].artist.split(', ');
+        
+        const picsArr = showsArr.map((artistName) => ({
+            artist: artistName,
+            pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
+        }))
+
+        return picsArr;
+
     }
 
     goToShowsInCity(cityName) {
@@ -59,10 +73,11 @@ class Cities extends Component {
 
     render() {
         
-        console.log('gotCities??');
-        console.log(this.state.gotCities + '\n');
-        debugger;
         
+        // debugger;
+        const self = this;
+        
+
         return (
             <View>
 
@@ -73,21 +88,23 @@ class Cities extends Component {
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'} />}>
                     <ScrollView>
                         {Object.keys(this.state.allCities).map((cityName) => {
-
-                            if(Object.keys(this.state.allCities[cityName]).length > 1){
+                            
+                            debugger;
+                            
+                            if(Object.keys(self.state.allCities[cityName]).length > 1){
                                 return (
                                     <NavButton key={`city-${cityName}`}
                                                title={cityName} 
                                                titleColor="white"
                                                imageSrc={require("../../../assets/fireworks.jpg")}
-                                               onPress={this.goToShowsInCity.bind(this, cityName)} 
-                                               showsInStage={this.state.allCities[cityName]}/>  
+                                               onPress={self.goToShowsInCity.bind(this, cityName)} 
+                                               showsInStage={self.state.allCities[cityName]}/>  
                                 )
                             } else {
                                 return (
                                     <MultiShow key={`city-${cityName}`}
-                                               shows={this.state.allCities[cityName]}
-                                               pics={makePicsArray(this.state.allCities[cityName])}/>
+                                               shows={self.state.allCities[cityName]}
+                                               pics={self.makePicsArray(this.state.allCities[cityName])}/>
                                 )
                             }
 
@@ -99,11 +116,6 @@ class Cities extends Component {
     }
 }
 
-function makePicsArray(showsArr){
-    
-    debugger;
-    
-    
-}
+
 
 export default Cities;
