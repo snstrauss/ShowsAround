@@ -84,7 +84,6 @@ class Cities extends Component {
 
     makePicsArray(stages, isSingleStage){
         
-        debugger;
         if (!isSingleStage){
             return;
         }
@@ -122,15 +121,18 @@ class Cities extends Component {
                             Object.keys(theCities).map((cityName) => {
                                 
                                 let isSingleStage = (!theCities[cityName].length);
-                            
+                                
                                 return (
                                     <ShowIf condition={isSingleStage} key={cityName} 
-                                        else={<NavButton title={cityName}
-                                                   titleColor="white"
-                                                   imageSrc={require('../../../assets/genericCity.jpg')}
-                                                   onPress={this.navButtonPressed.bind(this)} />} >
+                                        else={
+                                              <NavButton title={cityName}
+                                                       titleColor="white"
+                                                       imageSrc={require('../../../assets/genericCity.jpg')}
+                                                       onPress={this.navButtonPressed.bind(this)} />
+                                             }>
                                         <MultiShow shows={theCities[cityName]}
-                                                         pics={this.makePicsArray(theCities[cityName], isSingleStage)}/>
+                                                   cityName={cityName}
+                                                   pics={this.makePicsArray(theCities[cityName], isSingleStage)}/>
                                     </ShowIf>
                                 )
                             })
