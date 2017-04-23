@@ -7,10 +7,12 @@ import CitiesStyles from './Cities-styles';
 const { view, text } = CitiesStyles;
 
 import Header from '../../header/header-component';
+import MultiShow from '../../multi-show/MultiShow-comp';
+
 import ShowIf from '../../../helper-components/show-if/ShowIf';
 import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import NavButton from '../../../helper-components//nav-button/NavButton-comp';
-import MultiShow from '../../multi-show/MultiShow-comp';
+
 
 class Cities extends Component {
 
@@ -32,12 +34,21 @@ class Cities extends Component {
         // create the allCities object
         allShows.forEach((show) => {
 
-            if (!allCities.hasOwnProperty(show.location_eng)) {
-                allCities[show.location_eng] = [];
+            let propName = show.location_eng || show.location;
+
+            if (!allCities.hasOwnProperty(propName)) {
+                allCities[propName] = [];
             }
 
-            allCities[show.location_eng].push(show);
+            allCities[propName].push(show);
         })
+        
+        for (let cityName in allCities){
+            if(allCities[cityName].length === 1){
+                allCities[allCities[cityName][0].location] = allCities[cityName][0];
+                delete allCities[cityName];
+            }
+        }
         
         this.setState({
             allCities: allCities,
@@ -67,10 +78,37 @@ class Cities extends Component {
         })
     }
 
+    navButtonPressed(){
+        console.warn('i was pressed : ) ');
+    }
+
+    makePicsArray(stages, isSingleStage){
+        
+        debugger;
+        if (!isSingleStage){
+            return;
+        }
+        
+        const takeFrom = (typeof stages === 'object') ? stages[0] : stages;
+        
+        const defaultPics = this.props.navigation.state.params.defaultPictures;
+        const showsArr = stages.artist.split(', ');
+        
+        const picsArr = showsArr.map((artistName) => ({
+            artist: artistName,
+            pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
+        }))
+
+        return picsArr;
+
+    }
+
     render() {
         
         const self = this;
 
+        const theCities = this.state.allCities || {};
+        
         return (
             <View>
 
@@ -80,26 +118,25 @@ class Cities extends Component {
 
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'} />}>
                     <ScrollView>
-                        {Object.keys(this.state.allCities).map((cityName) => {
+                        {
+                            Object.keys(theCities).map((cityName) => {
+                                
+                                let isSingleStage = (!theCities[cityName].length);
                             
-                            if(Object.keys(self.state.allCities[cityName]).length > 1){
                                 return (
-                                    <NavButton key={`city-${cityName}`}
-                                               title={cityName} 
-                                               titleColor="white"
-                                               imageSrc={require("../../../assets/fireworks.jpg")}
-                                               onPress={self.goToShowsInCity.bind(this, cityName)} 
-                                               showsInStage={self.state.allCities[cityName]}/>  
+                                    <ShowIf condition={isSingleStage} key={cityName} 
+                                        else={<NavButton title={cityName}
+                                                   titleColor="white"
+                                                   imageSrc={require('../../../assets/genericCity.jpg')}
+                                                   onPress={this.navButtonPressed.bind(this)} />} >
+                                        <MultiShow shows={theCities[cityName]}
+                                                         pics={this.makePicsArray(theCities[cityName], isSingleStage)}/>
+                                    </ShowIf>
                                 )
-                            } else {
-                                return (
-                                    <MultiShow key={`city-${cityName}`}
-                                               shows={self.state.allCities[cityName]}
-                                               pics={this.makePicsArray(this.state.allCities[cityName])}/>
-                                )
-                            }
-
-                        })}
+                            })
+                            
+                            
+                        }
                     </ScrollView>
                 </ShowIf>
             </View>
@@ -110,3 +147,25 @@ class Cities extends Component {
 
 
 export default Cities;
+
+
+/*{Object.keys(this.state.allCities).map((cityName) => {
+    
+    if(Object.keys(self.state.allCities[cityName]).length > 1){
+        return (
+            <NavButton key={`city-${cityName}`}
+                        title={cityName} 
+                        titleColor="white"
+                        imageSrc={require("../../../assets/fireworks.jpg")}
+                        onPress={self.goToShowsInCity.bind(this, cityName)} 
+                        showsInStage={self.state.allCities[cityName]}/>  
+        )
+    } else {
+        return (
+            <MultiShow key={`city-${cityName}`}
+                        shows={self.state.allCities[cityName]}
+                        pics={this.makePicsArray(this.state.allCities[cityName])}/>
+        )
+    }
+
+})}*/

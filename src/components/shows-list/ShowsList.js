@@ -63,8 +63,6 @@ class ShowsList extends Component {
             }
 
             eval('var artistsJson = ' + responseText);
-
-            console.log(artistsJson);
             
             this.setState({
                 defaultPictures: artistsJson,
@@ -87,9 +85,6 @@ class ShowsList extends Component {
                 return (show.artist !== '');
             })
             
-            console.info('only data!');
-            console.info(onlyData);
-
             var now = new Date();
 
             var onlyAfterToday = fullJson.filter(findAfterToday.bind(null, now));
@@ -160,57 +155,6 @@ class ShowsList extends Component {
                                onPress={this.goToAreas.bind(this)} />
                     <OnlyShows showsToShow={this.state.showsArray} 
                                defaultPictures={this.state.defaultPictures} />
-                    {/*<ScrollView ref="scrolly">
-                        <Accordion
-
-                            ref="accord"
-
-                            sections={theArray}
-
-                            renderHeader={(show, idx) => {
-                                
-                                let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
-                                
-                                return (
-                                    <View>
-                                        <ShowHeader key={show.artist + idx} 
-                                            idx={idx} 
-                                            isLast={idx === theArray.length - 1} 
-                                            show={show} 
-                                            artist={thisArtist} 
-                                            parent={this} />
-                                    </View>
-                                )
-                            }}
-
-                            renderContent={(show, idx) => {
-                                
-                                let thisArtist = this.state.defaultPictures[show.artist.split(',')[0]] || defaultArtist;
-                                
-                                return (
-                                    <View>
-                                        <ShowContent key={show.artist + idx} 
-                                            idx={idx} 
-                                            isLast={idx === theArray.length - 1} 
-                                            show={show} 
-                                            artist={thisArtist} 
-                                            parent={this} />
-                                    </View>
-                                )
-                            }}
-                            
-                            parentman={self}
-
-                            self={this.refs.accord}
-
-                            onChange={(idx) => {
-                                if (idx === theArray.length - 1){
-                                    console.log(this.parentman.state.goDown());
-                                }
-                            }}>
-                        </Accordion>
-                        <EndItem></EndItem>
-                    </ScrollView>*/}
                 </ShowIf>
             </View>
         )

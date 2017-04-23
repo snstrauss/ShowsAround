@@ -66,7 +66,7 @@ class OnlyShows extends Component {
 
                     onChange={(idx) => {
                         if (idx === this.props.showsToShow.length - 1){
-                            {/*console.log(this.state.goDown());*/}
+                            
                         }
                     }}>
                 </Accordion>

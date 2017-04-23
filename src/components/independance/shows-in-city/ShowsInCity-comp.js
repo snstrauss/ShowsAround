@@ -50,8 +50,6 @@ class ShowsInCity extends Component {
     render(){
 
         const allShows = this.props.navigation.state.params.showsInCity;
-        
-        debugger;
                 
         return (
             <View>
@@ -60,8 +58,6 @@ class ShowsInCity extends Component {
                 <ScrollView>
                     {
                         allShows.map((show) => {
-                            
-                            debugger;
                             
                             return (
                                 <View key={`stage-${show.location}`}>

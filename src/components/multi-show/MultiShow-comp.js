@@ -30,7 +30,9 @@ class MultiShow extends Component {
         // thisShow = this.props.shows[0];
         artistsPics = this.props.pics;
 
+        
         debugger;
+        
 
         return (
 
