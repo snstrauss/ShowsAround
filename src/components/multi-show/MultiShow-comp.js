@@ -39,21 +39,25 @@ class MultiShow extends Component {
         
 
         moreThanOneArtist = artistsPics.length > 1
-        
-        debugger;
+        let showTitle = theShows.location;
+        if(!moreThanOneArtist){
+            showTitle += ' - ' + theShows.artist;
+            
+            debugger;
+            
+        }
         
         return (
             
-            
-            
             <View style={showBox}>
                 <View style={textParent}>
-                    <Text style={titleStyle}>{theShows.location}</Text>
+                    <Text style={titleStyle}>{showTitle}</Text>
                 </View>
                 <ShowIf condition={moreThanOneArtist}
                         else=
                         {
                             <NavButton title={this.props.cityName}
+                                       hideTitle={true}
                                        titleColor="white"
                                        imageSrc={{uri: artistsPics[0].pic}}
                                        onPress={this.navButtonPressed.bind(this)} />

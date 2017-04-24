@@ -26,6 +26,8 @@ const NavButtonStyles = {
         zIndex: 1,
     },
 
+
+
     navText: {
         fontSize: 20,
         // color: 'white',
