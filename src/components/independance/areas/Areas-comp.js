@@ -39,7 +39,7 @@ class Areas extends Component {
         allShows.forEach((show) => {
 
             // clean area names from stupid 'יום העצמאות'
-            let area = show.area.replace('יום העצמאות', '').substr(3);
+            let area = show.area.replace('עצמאות', '').substr(3);
 
             // create array for specific area, if it doesnt exist
             if(!allAreas.hasOwnProperty(area)){
