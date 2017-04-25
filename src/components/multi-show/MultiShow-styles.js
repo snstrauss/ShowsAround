@@ -93,7 +93,7 @@ const MultiShowStyles = {
         color: 'white',
         textAlign: 'right',
         fontSize: 17,
-        marginRight: 3,
+        margin: 4,
     }
 };
 

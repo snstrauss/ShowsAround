@@ -18,10 +18,6 @@ class MultiShow extends Component {
         showDetails: false
     }
 
-    navButtonPressed(){
-        alert('now i was pressed!!!')
-    }
-
     showDetails(event){
         
         this.setState((oldState) => {
@@ -39,20 +35,9 @@ class MultiShow extends Component {
         let theShows = this.props.shows;
         theShows = (typeof theShows === 'Array') ? theShows[0] : theShows
         // thisShow = this.props.shows[0];
-        artistsPics = this.props.pics;
+        artistsPics = this.props.pics; 
         
-        
-        artistsPics.forEach((pic) => {
-
-            if (pic.pic === ''){
-                
-                debugger;
-                
-            }
-        })
-        
-
-        moreThanOneArtist = artistsPics.length > 1
+        moreThanOneArtist = artistsPics && artistsPics.length > 1;
         let showTitle = theShows.location;
         if(!moreThanOneArtist){
             showTitle += ' - ' + theShows.artist;   

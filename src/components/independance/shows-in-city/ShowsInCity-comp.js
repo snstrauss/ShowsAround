@@ -11,6 +11,9 @@ import ShowIf from '../../../helper-components/show-if/ShowIf';
 import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import OnlyShows from '../../only-shows/OnlyShows-comp';
 import MultiShow from '../../multi-show/MultiShow-comp';
+import EndItem from '../../../helper-components/end-item/EndItem';
+
+import picsArray from '../../../services/default-pictures/makePicsArray';
 
 class ShowsInCity extends Component {
 
@@ -31,43 +34,53 @@ class ShowsInCity extends Component {
         }
     }
 
-    makePicsArray(stages){
-
-        const takeFrom = (typeof stages === 'Array') ? stages[0] : stages;
+    // makePicsArray(stages){
         
-        const defaultPics = this.props.navigation.state.params.defaultPictures;
-        const showsArr = takeFrom.artist.split(', ');
+    //     const takeFrom = (typeof stages === 'Array') ? stages[0] : stages;
         
-        const picsArr = showsArr.map((artistName) => ({
-            artist: artistName,
-            pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
-        }))
+    //     const defaultPics = this.props.navigation.state.params.defaultPictures;
+    //     const showsArr = takeFrom.artist.split(', ');
+        
+    //     const picsArr = showsArr.map((artistName) => ({
+    //         artist: artistName,
+    //         pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
+    //     }))
 
-        return picsArr;
+    //     return picsArr;
 
-    }
+    // }
 
     render(){
 
+        const defaultPics = this.props.navigation.state.params.defaultPictures;
+
         const allShows = this.props.navigation.state.params.showsInCity;
-                
+            
+        const calcHeight = allShows.length > 4 ? 85 : 700;
+        
+        let picsArrayProxy = picsArray;
+        
         return (
             <View>
                 <Header title={this.props.navigation.state.params.cityName} 
                         goBack={this.props.navigation.goBack.bind(this)}/>
-                <ScrollView>
+                <ScrollView scrollEnabled={allShows.length > 4}>
                     {
                         allShows.map((show) => {
                             
+                            let isMultiShow = show.artist.includes(',')
+                            let picsArr = picsArrayProxy.make(show, isMultiShow, defaultPics);
+
                             return (
                                 <View key={`stage-${show.location}`}>
                                     <MultiShow key={`city-${show.location}`}
                                             shows={show}
-                                            pics={this.makePicsArray(show)} />
+                                            pics={picsArr} />
                                 </View>
                             )
                         })
                     }
+                <EndItem height={calcHeight} />
                 </ScrollView>
                 
             </View>

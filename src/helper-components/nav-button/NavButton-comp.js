@@ -12,8 +12,6 @@ const NavButton = (props) => {
     
     const hideTitle = props.hideTitle;
     
-    // debugger;
-    
     return (
         <TouchableHighlight style={navButton} onPress={props.onPress}>
             <View>
