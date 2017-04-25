@@ -41,46 +41,44 @@ class MultiShow extends Component {
         moreThanOneArtist = artistsPics.length > 1
         let showTitle = theShows.location;
         if(!moreThanOneArtist){
-            showTitle += ' - ' + theShows.artist;
-            
-            debugger;
-            
+            showTitle += ' - ' + theShows.artist;   
         }
         
         return (
-            
-            <View style={showBox}>
-                <View style={textParent}>
-                    <Text style={titleStyle}>{showTitle}</Text>
-                </View>
-                <ShowIf condition={moreThanOneArtist}
-                        else=
-                        {
-                            <NavButton title={this.props.cityName}
-                                       hideTitle={true}
-                                       titleColor="white"
-                                       imageSrc={{uri: artistsPics[0].pic}}
-                                       onPress={this.navButtonPressed.bind(this)} />
-                        } >
-                    
-                    <Carousel style={{ height: 150 }} delay={4000} autoplay >
-                        {artistsPics.map((artist) => (
-                            <View style={carouselItem} key={artist.artist}>
-                                <Image resizeMode="stretch"
-                                    style={{ height: 150 }}
-                                    source={{ uri: artist.pic }}>
-                                    <View style={{ backgroundColor: 'white', zIndex: 2 }}>
-                                        <Text style={carouselText}>
-                                            {artist.artist}
-                                        </Text>
-                                    </View>
-                                </Image>
-                            </View>
-                        ))}
-                    </Carousel>
+            <TouchableHighlight onPress={this.props.onPress}>
+                <View style={showBox}>
+                    <View style={textParent}>
+                        <Text style={titleStyle}>{showTitle}</Text>
+                    </View>
+                    <ShowIf condition={moreThanOneArtist}
+                            else=
+                            {
+                                <NavButton title={this.props.cityName}
+                                        hideTitle={true}
+                                        titleColor="white"
+                                        imageSrc={{uri: artistsPics[0].pic}}
+                                        onPress={this.navButtonPressed.bind(this)} />
+                            } >
+                        
+                        <Carousel style={{ height: 150 }} delay={4000} autoplay >
+                            {artistsPics.map((artist) => (
+                                <TouchableHighlight onPress={this.props.onPress} style={carouselItem} key={artist.artist}>
+                                    <Image resizeMode="stretch"
+                                        style={{ height: 150 }}
+                                        source={{ uri: artist.pic }}>
+                                        <View style={{ backgroundColor: 'white', zIndex: 2 }}>
+                                            <Text style={carouselText}>
+                                                {artist.artist}
+                                            </Text>
+                                        </View>
+                                    </Image>
+                                </TouchableHighlight>
+                            ))}
+                        </Carousel>
 
-                </ShowIf>
-            </View>
+                    </ShowIf>
+                </View>
+            </TouchableHighlight>
 
 
         )

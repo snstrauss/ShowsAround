@@ -83,6 +83,10 @@ class Cities extends Component {
         console.warn('i was pressed : ) ');
     }
 
+    multiShowPressed(){
+        alert('multi pulti');
+    }
+
     makePicsArray(stages, isSingleStage){
         
         if (!isSingleStage){
@@ -111,7 +115,7 @@ class Cities extends Component {
         
         // debugger;
         
-        const calcHeight = Object.keys(theCities).length > 4 ? 170 : 600;
+        const calcHeight = Object.keys(theCities).length > 4 ? 170 : 650;
         
         return (
             <View>
@@ -137,7 +141,8 @@ class Cities extends Component {
                                              }>
                                         <MultiShow shows={theCities[cityName]}
                                                    cityName={cityName}
-                                                   pics={this.makePicsArray(theCities[cityName], isSingleStage)}/>
+                                                   pics={this.makePicsArray(theCities[cityName], isSingleStage)}
+                                                   onPress={this.multiShowPressed.bind(this)}/>
                                     </ShowIf>
                                 )
                             })
