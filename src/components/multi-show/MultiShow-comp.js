@@ -42,13 +42,14 @@ class MultiShow extends Component {
         artistsPics = this.props.pics;
         
         
-        
-        // if(artistsPics.length === 1){
-            
-        //     debugger;
-            
-        //     return null;
-        // }
+        artistsPics.forEach((pic) => {
+
+            if (pic.pic === ''){
+                
+                debugger;
+                
+            }
+        })
         
 
         moreThanOneArtist = artistsPics.length > 1
