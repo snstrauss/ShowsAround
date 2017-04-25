@@ -1,23 +1,26 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import { View } from 'react-native';
 
 
-const ShowIf = (props) => {
 
-    let insides = null;
+class ShowIf extends Component {
 
-    if(props.condition){
-        insides = props.children;
-    } else {
-        insides = props.else;
+    render(){
+
+        let insides = null;
+
+        if(this.props.condition){
+            insides = this.props.children;
+        } else {
+            insides = this.props.else;
+        }
+
+        return (
+            <View>{insides}</View>
+        )
     }
-    
-    return (
-        <View>{insides}</View>
-    )
-
 }
 
 export default ShowIf;

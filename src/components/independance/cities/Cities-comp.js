@@ -6,6 +6,8 @@ import { View, Text, ScrollView, Platform } from 'react-native';
 import CitiesStyles from './Cities-styles';
 const { view, text } = CitiesStyles;
 
+import Accordion from 'react-native-collapsible/Accordion';
+
 import Header from '../../header/header-component';
 import MultiShow from '../../multi-show/MultiShow-comp';
 
@@ -113,8 +115,6 @@ class Cities extends Component {
 
         const theCities = this.state.allCities || {};
         
-        // debugger;
-        
         const calcHeight = Object.keys(theCities).length > 4 ? 170 : 650;
         
         return (
@@ -128,28 +128,26 @@ class Cities extends Component {
                     <ScrollView>
                         {
                             Object.keys(theCities).map((cityName) => {
-                                
+        
                                 let isSingleStage = (!theCities[cityName].length);
                                 
                                 return (
                                     <ShowIf condition={isSingleStage} key={cityName} 
                                         else={
-                                              <NavButton title={cityName}
-                                                       titleColor="white"
-                                                       imageSrc={require('../../../assets/genericCity.jpg')}
-                                                       onPress={this.navButtonPressed.bind(this)} />
-                                             }>
+                                                <NavButton title={cityName}
+                                                        titleColor="white"
+                                                        imageSrc={require('../../../assets/genericCity.jpg')}
+                                                        onPress={this.navButtonPressed.bind(this)} />
+                                                }>
                                         <MultiShow shows={theCities[cityName]}
-                                                   cityName={cityName}
-                                                   pics={this.makePicsArray(theCities[cityName], isSingleStage)}
-                                                   onPress={this.multiShowPressed.bind(this)}/>
+                                                    cityName={cityName}
+                                                    pics={this.makePicsArray(theCities[cityName], isSingleStage)}
+                                                    onPress={this.multiShowPressed.bind(this)}/>
                                     </ShowIf>
                                 )
                             })
-                            
-                            
                         }
-                    <EndItem height={calcHeight}/>
+                        <EndItem height={calcHeight}/>
                     </ScrollView>
                 </ShowIf>
             </View>
@@ -161,24 +159,26 @@ class Cities extends Component {
 
 export default Cities;
 
-
-/*{Object.keys(this.state.allCities).map((cityName) => {
+/*{
+    Object.keys(theCities).map((cityName) => {
+        
+        let isSingleStage = (!theCities[cityName].length);
+        
+        return (
+            <ShowIf condition={isSingleStage} key={cityName} 
+                else={
+                        <NavButton title={cityName}
+                                titleColor="white"
+                                imageSrc={require('../../../assets/genericCity.jpg')}
+                                onPress={this.navButtonPressed.bind(this)} />
+                        }>
+                <MultiShow shows={theCities[cityName]}
+                            cityName={cityName}
+                            pics={this.makePicsArray(theCities[cityName], isSingleStage)}
+                            onPress={this.multiShowPressed.bind(this)}/>
+            </ShowIf>
+        )
+    })
     
-    if(Object.keys(self.state.allCities[cityName]).length > 1){
-        return (
-            <NavButton key={`city-${cityName}`}
-                        title={cityName} 
-                        titleColor="white"
-                        imageSrc={require("../../../assets/fireworks.jpg")}
-                        onPress={self.goToShowsInCity.bind(this, cityName)} 
-                        showsInStage={self.state.allCities[cityName]}/>  
-        )
-    } else {
-        return (
-            <MultiShow key={`city-${cityName}`}
-                        shows={self.state.allCities[cityName]}
-                        pics={this.makePicsArray(this.state.allCities[cityName])}/>
-        )
-    }
-
-})}*/
+    
+}*/

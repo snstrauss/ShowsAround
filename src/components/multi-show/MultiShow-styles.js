@@ -1,4 +1,6 @@
 
+import Color from '../../services/random-color/randomColor';
+
 import { Dimensions } from 'react-native';
 
 const MultiShowStyles = {
@@ -79,6 +81,20 @@ const MultiShowStyles = {
         fontSize: 24, 
         color: 'red' 
     },
+
+    details: {
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        position: 'absolute',
+        bottom: 0,
+        width: Dimensions.get('window').width
+    },
+
+    detailsText: {
+        color: 'white',
+        textAlign: 'right',
+        fontSize: 17,
+        marginRight: 3,
+    }
 };
 
 export default MultiShowStyles;
