@@ -70,7 +70,7 @@ class OnlyShows extends Component {
                         }
                     }}>
                 </Accordion>
-                <EndItem></EndItem>
+                <EndItem height={339}/>
             </ScrollView>
         )
     }

@@ -74,6 +74,11 @@ const MultiShowStyles = {
         height: 150,
         width: Dimensions.get('window').width,
     },
+
+    carouselText: { 
+        fontSize: 24, 
+        color: 'red' 
+    },
 };
 
 export default MultiShowStyles;

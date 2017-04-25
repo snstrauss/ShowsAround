@@ -11,7 +11,7 @@ const Color = {
     },
 
     appColor: 'dodgerblue',
-    greyColor: '#333',
+    greyColor: '#191919',
 }
 
 export default Color;

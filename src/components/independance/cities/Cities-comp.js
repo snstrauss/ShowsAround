@@ -12,6 +12,7 @@ import MultiShow from '../../multi-show/MultiShow-comp';
 import ShowIf from '../../../helper-components/show-if/ShowIf';
 import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import NavButton from '../../../helper-components//nav-button/NavButton-comp';
+import EndItem from '../../../helper-components/end-item/EndItem';
 
 
 class Cities extends Component {
@@ -108,6 +109,10 @@ class Cities extends Component {
 
         const theCities = this.state.allCities || {};
         
+        // debugger;
+        
+        const calcHeight = Object.keys(theCities).length > 4 ? 170 : 600;
+        
         return (
             <View>
 
@@ -139,6 +144,7 @@ class Cities extends Component {
                             
                             
                         }
+                    <EndItem height={calcHeight}/>
                     </ScrollView>
                 </ShowIf>
             </View>

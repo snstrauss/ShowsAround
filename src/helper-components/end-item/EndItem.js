@@ -7,8 +7,8 @@ import EndItemStyles from './EndItem-styles.js';
 
 const { endItem } = EndItemStyles;
 
-const EndItem = () => (
-    <View style={endItem}>
+const EndItem = (props) => (
+    <View style={[endItem, {height: props.height}]}>
     </View>
 );
 

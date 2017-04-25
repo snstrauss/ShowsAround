@@ -70,7 +70,7 @@ class MultiShow extends Component {
                                     style={{ height: 150 }}
                                     source={{ uri: artist.pic }}>
                                     <View style={{ backgroundColor: 'white', zIndex: 2 }}>
-                                        <Text style={{ fontSize: 24, color: 'red' }}>
+                                        <Text style={carouselText}>
                                             {artist.artist}
                                         </Text>
                                     </View>

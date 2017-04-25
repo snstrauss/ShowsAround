@@ -10,6 +10,7 @@ import Header from '../../header/header-component';
 import ShowIf from '../../../helper-components/show-if/ShowIf';
 import WaitMsg from '../../../helper-components/wait-msg/WaitMsg';
 import NavButton from '../../../helper-components/nav-button/NavButton-comp';
+import EndItem from '../../../helper-components/end-item/EndItem';
 
 class Areas extends Component {
 
@@ -86,6 +87,7 @@ class Areas extends Component {
                                            onPress={this.goToCities.bind(this, areaName)} />        
                             ))
                         }
+                    <EndItem height={171} />
                     </ScrollView>
                 </ShowIf>
             </View>
