@@ -21,7 +21,7 @@ class MultiShow extends Component {
     showDetails(event){
         
         this.setState((oldState) => {
-
+            
             let cond = !oldState.showDetails;
 
             return {
@@ -47,43 +47,45 @@ class MultiShow extends Component {
 
         return (
             <TouchableHighlight onPress={this.showDetails.bind(this)} >
-                <View style={showBox}>
-                    <View style={textParent}>
+                <View>
+                    <View style={textParent} collapsable={false}>
                         <Text style={titleStyle}>{showTitle}</Text>
                     </View>
-                    <ShowIf condition={moreThanOneArtist}
-                            else=
-                            {
-                                <NavButton title={this.props.cityName}
-                                        hideTitle={true}
-                                        titleColor="white"
-                                        imageSrc={{uri: artistsPics[0].pic}}
-                                        onPress={this.showDetails.bind(this)} />
-                            } >
-                        
-                        <Carousel style={{ height: 150 }} delay={4000} autoplay >
-                            {artistsPics.map((artist) => (
-                                <TouchableHighlight onPress={this.showDetails.bind(this)} style={carouselItem} key={artist.artist}>
-                                    <Image resizeMode="stretch"
-                                        style={{ height: 150 }}
-                                        source={{ uri: artist.pic }}>
-                                        <View style={{ backgroundColor: 'white', zIndex: 2 }}>
-                                            <Text style={carouselText}>
-                                                {artist.artist}
-                                            </Text>
-                                        </View>
-                                    </Image>
-                                </TouchableHighlight>
-                            ))}
-                        </Carousel>
-                    </ShowIf>
-                    <ShowIf condition={this.state.showDetails}>
-                        <View style={details}>
-                            <Text style={detailsText}>
-                                {description}
-                            </Text>
-                        </View>
-                    </ShowIf>
+                    <View style={showBox}>
+                        <ShowIf condition={moreThanOneArtist}
+                                else=
+                                {
+                                    <NavButton title={this.props.cityName}
+                                            hideTitle={true}
+                                            titleColor="white"
+                                            imageSrc={{uri: artistsPics[0].pic}}
+                                            onPress={this.showDetails.bind(this)} />
+                                } >
+                            
+                            <Carousel style={{ height: 150 }} delay={4000} autoplay >
+                                {artistsPics.map((artist) => (
+                                    <TouchableHighlight onPress={this.showDetails.bind(this)} style={carouselItem} key={artist.artist}>
+                                        <Image resizeMode="stretch"
+                                            style={{ height: 150 }}
+                                            source={{ uri: artist.pic }}>
+                                            <View style={{ backgroundColor: 'white', zIndex: 2 }}>
+                                                <Text style={carouselText}>
+                                                    {artist.artist}
+                                                </Text>
+                                            </View>
+                                        </Image>
+                                    </TouchableHighlight>
+                                ))}
+                            </Carousel>
+                        </ShowIf>
+                        <ShowIf condition={this.state.showDetails}>
+                            <View style={details}>
+                                <Text style={detailsText}>
+                                    {description}
+                                </Text>
+                            </View>
+                        </ShowIf>
+                    </View>
                 </View>
             </TouchableHighlight>
 
