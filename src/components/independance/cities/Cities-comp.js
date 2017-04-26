@@ -60,20 +60,6 @@ class Cities extends Component {
         })
     }
 
-    // makePicsArray(stages){
-   
-    //     const defaultPics = this.props.navigation.state.params.defaultPictures;
-    //     const showsArr = stages[0].artist.split(', ');
-        
-    //     const picsArr = showsArr.map((artistName) => ({
-    //         artist: artistName,
-    //         pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
-    //     }))
-
-    //     return picsArr;
-
-    // }
-
     defaultPictures = this.props.navigation.state.params.defaultPictures;
 
     goToShowsInCity(cityName, event) {
@@ -83,64 +69,6 @@ class Cities extends Component {
             defaultPictures: this.defaultPictures
         })
     }
-
-
-
-    // makePicsArray(stages, isSingleStage){
-        
-    //     const platform = Platform.OS;
-
-    //     if (!isSingleStage){
-    //         return;
-    //     }
-        
-    //     const takeFrom = (typeof stages === 'object') ? stages[0] : stages;
-        
-    //     const defaultPics = this.props.navigation.state.params.defaultPictures;
-    //     const showsArr = stages.artist.split(', ');
-        
-    //     const picsArr = showsArr.map((artistName) => {
-
-    //         return {
-    //             artist: artistName,
-    //             pic: getCorrectPic(artistName)
-    //         }            
-    //     })
-
-    //     return picsArr;
-
-
-
-    //     function getCorrectPic(artistName){
-
-    //         let artistObj = defaultPics[artistName];
-
-    //         if(artistObj){
-    //             // if image url exists
-    //             if(artistObj.image.length > 0){
-    //                 // if image url is https, or from showsaround database
-
-    //                 // http images should be shown on android...
-    //                 // https requirement is an iOS issue
-    //                 if(
-    //                     (platform === 'android') ||
-    //                     (artistObj.image.substring(0, 5) === 'https' ) || 
-    //                     (artistObj.image.includes('showsaround.s3-website-eu-west-1.amazonaws.com'))
-    //                 ){
-    //                     return artistObj.image;
-    //                 }
-    //             }
-    //         }
-
-
-    //         // default: return turkey image
-    //         return ('https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487');
-
-    //     }
-
-    // }
-
-    
 
     render() {
         
@@ -193,26 +121,3 @@ class Cities extends Component {
 
 export default Cities;
 
-/*{
-    Object.keys(theCities).map((cityName) => {
-        
-        let isSingleStage = (!theCities[cityName].length);
-        
-        return (
-            <ShowIf condition={isSingleStage} key={cityName} 
-                else={
-                        <NavButton title={cityName}
-                                titleColor="white"
-                                imageSrc={require('../../../assets/genericCity.jpg')}
-                                onPress={this.navButtonPressed.bind(this)} />
-                        }>
-                <MultiShow shows={theCities[cityName]}
-                            cityName={cityName}
-                            pics={this.makePicsArray(theCities[cityName], isSingleStage)}
-                            onPress={this.multiShowPressed.bind(this)}/>
-            </ShowIf>
-        )
-    })
-    
-    
-}*/

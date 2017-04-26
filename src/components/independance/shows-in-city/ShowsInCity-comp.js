@@ -34,22 +34,6 @@ class ShowsInCity extends Component {
         }
     }
 
-    // makePicsArray(stages){
-        
-    //     const takeFrom = (typeof stages === 'Array') ? stages[0] : stages;
-        
-    //     const defaultPics = this.props.navigation.state.params.defaultPictures;
-    //     const showsArr = takeFrom.artist.split(', ');
-        
-    //     const picsArr = showsArr.map((artistName) => ({
-    //         artist: artistName,
-    //         pic: defaultPics[artistName] ? defaultPics[artistName].image : 'https://i1.wp.com/lenews.ch/wp-content/uploads/2015/12/The-turkey-bird-naming-confusion.jpg?resize=800%2C487'
-    //     }))
-
-    //     return picsArr;
-
-    // }
-
     render(){
 
         const defaultPics = this.props.navigation.state.params.defaultPictures;
