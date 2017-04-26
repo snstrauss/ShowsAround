@@ -13,6 +13,7 @@ import ShowHeader from '../show/show-export/ShowHeader';
 import ShowContent from '../show/show-export/ShowContent';
 import EndItem from '../../helper-components/end-item/EndItem';
 import ShowIf from '../../helper-components/show-if/ShowIf';
+import DetailsBuffer from '../../helper-components/details-buffer/DetailsBuffer-comp';
 
 class OnlyShows extends Component {
 
@@ -102,12 +103,15 @@ class OnlyShows extends Component {
 
                     self={this} >
                 </Accordion>
-                <View style={[noMoreShowsBuffer, {height: this.state.bufferHeight}]}>
+                <DetailsBuffer color="#4F4F4F" fontSize={25} height={this.state.bufferHeight}>
+                    no more shows for now...
+                    <Icon name="heart-broken" size={30} color="firebrick"/>
+                </DetailsBuffer>
+                {/*<View style={[noMoreShowsBuffer, {height: this.state.bufferHeight}]}>
                     <Text style={noMoreShowsText}>
-                        No More Shows 
-                        <Icon name="heart-broken" size={30} color="red"/>
+                        
                     </Text>
-                </View>
+                </View>*/}
                 <EndItem height={339}/>
             </ScrollView>
         )
