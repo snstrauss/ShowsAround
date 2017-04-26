@@ -30,10 +30,29 @@ const NavButtonStyles = {
 
     navText: {
         fontSize: 20,
-        // color: 'white',
+        color: 'white',
         fontWeight: 'bold',
-        alignSelf: 'center',
-        marginTop: 5,
+        marginRight: 5,
+        // marginTop: 5,
+    },
+
+
+    textParent: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        right: 0,
+        left: 0,
+        height: 30,
+        zIndex: 1,
+    },
+
+    titleStyle: {
+        color: 'white',
+        fontSize: 23,
+        fontWeight: 'bold',
+        position: 'absolute',
+        top: 0,
+        right: 5,
     },
 };
 

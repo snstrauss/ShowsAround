@@ -107,11 +107,6 @@ class OnlyShows extends Component {
                     no more shows for now...
                     <Icon name="heart-broken" size={30} color="firebrick"/>
                 </DetailsBuffer>
-                {/*<View style={[noMoreShowsBuffer, {height: this.state.bufferHeight}]}>
-                    <Text style={noMoreShowsText}>
-                        
-                    </Text>
-                </View>*/}
                 <EndItem height={400}/>
             </ScrollView>
         )

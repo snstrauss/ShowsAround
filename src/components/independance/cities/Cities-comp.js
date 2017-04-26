@@ -86,7 +86,7 @@ class Cities extends Component {
 
 
                 <ShowIf condition={this.state.gotCities} else={<WaitMsg msg={'please wait...'} />}>
-                    <ScrollView scrollEnabled={Object.keys(theCities).length > 5}>
+                    <ScrollView scrollEnabled={Object.keys(theCities).length >= 5}>
                         {
                             Object.keys(theCities).map((cityName) => {
         

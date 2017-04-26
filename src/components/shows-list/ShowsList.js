@@ -149,7 +149,11 @@ class ShowsList extends Component {
                 <Header title="ShowsAround" hasBack={false} />
                 <ShowIf condition={this.state.gotShows && this.state.gotArtists} else={<WaitMsg msg={'please wait...'}/>}>
                     <NavButton title="לאירועי יום העצמאות" 
-                               titleColor="gold"
+                               titleStyleOverride={{
+                                   color: 'gold',
+                                   alignSelf: 'center',
+                                   fontSize: 23,
+                               }}
                                imageSrc={require("../../assets/fireworks.jpg")}
                                defaultPics={this.state.defaultPictures}
                                onPress={this.goToAreas.bind(this)} />

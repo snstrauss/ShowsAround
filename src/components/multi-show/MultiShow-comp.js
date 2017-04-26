@@ -68,11 +68,7 @@ class MultiShow extends Component {
                                 else=
                                 {
                                     <View>
-                                        <View style={textParent} collapsable={false}>
-                                            <Text style={titleStyle}>{showTitle}</Text>
-                                        </View>
-                                        <NavButton title={this.props.cityName}
-                                            hideTitle={true}
+                                        <NavButton title={showTitle}
                                             titleColor="white"
                                             imageSrc={{uri: artistsPics[0].pic}}
                                             onPress={this.showDetails.bind(this)} />
