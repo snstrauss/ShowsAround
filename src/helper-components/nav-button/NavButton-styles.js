@@ -8,12 +8,12 @@ const NavButtonStyles = {
         borderWidth: 2,
         borderColor: 'white',
 
-        height: 120,
+        height: 150,
         // backgroundColor: 'blue'
     },
 
     navImage: {
-        height: 116,
+        height: 150,
         width: width - 4,
     },
 

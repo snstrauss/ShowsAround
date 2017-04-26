@@ -11,7 +11,6 @@ class DetailsBuffer extends Component{
     render(){
 
         let {height, color, fontSize} = this.props;
-        console.log(height, color, fontSize)
         
         let dynamicViewStyles = {
             height: height

@@ -67,11 +67,17 @@ class MultiShow extends Component {
                         <ShowIf condition={moreThanOneArtist}
                                 else=
                                 {
-                                    <NavButton title={this.props.cityName}
+                                    <View>
+                                        <View style={textParent} collapsable={false}>
+                                            <Text style={titleStyle}>{showTitle}</Text>
+                                        </View>
+                                        <NavButton title={this.props.cityName}
                                             hideTitle={true}
                                             titleColor="white"
                                             imageSrc={{uri: artistsPics[0].pic}}
                                             onPress={this.showDetails.bind(this)} />
+                                    </View>
+                                    
                                 } >
                             
                             <Carousel style={{ height: 150 }}
