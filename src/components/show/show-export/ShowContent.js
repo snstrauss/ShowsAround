@@ -54,6 +54,7 @@ class ShowContent extends Component {
         return (
             <View style={[detailsParent, {borderColor: this.state.borderColor}]}>
                 <Text style={detailsStyle}>{thisShow.details}</Text>
+
             </View>
         );
     }

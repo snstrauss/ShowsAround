@@ -52,17 +52,19 @@ class ShowHeader extends Component {
         let thisPrice = eval(thisShow.price) ? thisShow.price : 'חינם';        
 
         return (
-            <View style={showBox}>  
-                <View style={textParent}>
-                    <Text style={titleStyle}>{thisShow.artist}</Text>    
-                </View>
-                <View style={[imageParent, {borderColor: this.state.borderColor}]}>
-                    <Image resizeMode="stretch" style={{height: this.imageHeight}} source={{ uri: thisShowDefaultPicUri }}></Image>
-                    <View style={priceParent}>
-                        <Text style={priceStyle}>{thisPrice}</Text>
+            <TouchableHighlight style={showBox} onPress={this.props.onPress}>  
+                <View>
+                    <View style={textParent}>
+                        <Text style={titleStyle}>{thisShow.artist}</Text>    
+                    </View>
+                    <View style={[imageParent, {borderColor: this.state.borderColor}]}>
+                        <Image resizeMode="stretch" style={{height: this.imageHeight}} source={{ uri: thisShowDefaultPicUri }}></Image>
+                        <View style={priceParent}>
+                            <Text style={priceStyle}>{thisPrice}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         );
     }
 };

@@ -13,6 +13,7 @@
 		"react-native-button": "^1.8.2",
 		"react-native-collapsible": "^0.8.0",
 		"react-native-looped-carousel": "^0.1.5",
+		"react-native-vector-icons": "^4.0.1",
 		"react-navigation": "git+https://github.com/react-community/react-navigation.git"
 	},
 	"devDependencies": {

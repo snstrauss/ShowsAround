@@ -8,6 +8,14 @@ const OnlyShowsStyles = {
     text: {
         color: 'cyan',
     },
+
+    noMoreShowsBuffer: {
+
+    },
+
+    noMoreShowsText: {
+        
+    }
 };
 
 export default OnlyShowsStyles;
