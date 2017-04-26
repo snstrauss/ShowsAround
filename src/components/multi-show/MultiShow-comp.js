@@ -15,7 +15,8 @@ class MultiShow extends Component {
     state = {
         gotDefaults: false,
         defaultPics: {},
-        showDetails: false
+        showDetails: false,
+        currentArtistIndex: 0
     }
 
     showDetails(event){
@@ -30,10 +31,21 @@ class MultiShow extends Component {
         })
     }
 
-    render() {
+    slideChanged(idx){
+        
+        console.log('slide changed!');
+        console.log(idx);
+        console.log('');
+        // debugger;
+        
+    }
 
+    render() {
+        
+        
         let theShows = this.props.shows;
-        theShows = (typeof theShows === 'Array') ? theShows[0] : theShows
+        theShows = (typeof theShows === 'Array') ? theShows[0] : theShows;
+        let theArtists = this.props.shows.artist.split(', ');
         // thisShow = this.props.shows[0];
         artistsPics = this.props.pics; 
         
@@ -48,9 +60,9 @@ class MultiShow extends Component {
         return (
             <TouchableHighlight onPress={this.showDetails.bind(this)} >
                 <View>
-                    <View style={textParent} collapsable={false}>
+                    {/*<View style={textParent} collapsable={false}>
                         <Text style={titleStyle}>{showTitle}</Text>
-                    </View>
+                    </View>*/}
                     <View style={showBox}>
                         <ShowIf condition={moreThanOneArtist}
                                 else=
@@ -62,16 +74,17 @@ class MultiShow extends Component {
                                             onPress={this.showDetails.bind(this)} />
                                 } >
                             
-                            <Carousel style={{ height: 150 }} delay={4000} autoplay >
+                            <Carousel style={{ height: 150 }}
+                                      delay={4000} 
+                                      autoplay
+                                      onAnimateNextPage={this.slideChanged.bind(this)} >
                                 {artistsPics.map((artist) => (
                                     <TouchableHighlight onPress={this.showDetails.bind(this)} style={carouselItem} key={artist.artist}>
                                         <Image resizeMode="stretch"
                                             style={{ height: 150 }}
                                             source={{ uri: artist.pic }}>
-                                            <View style={{ backgroundColor: 'white', zIndex: 2 }}>
-                                                <Text style={carouselText}>
-                                                    {artist.artist}
-                                                </Text>
+                                            <View style={textParent} collapsable={false}>
+                                                <Text style={titleStyle}>{`${showTitle} - ${artist.artist}`}</Text>
                                             </View>
                                         </Image>
                                     </TouchableHighlight>
