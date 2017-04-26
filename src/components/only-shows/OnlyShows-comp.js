@@ -112,7 +112,7 @@ class OnlyShows extends Component {
                         
                     </Text>
                 </View>*/}
-                <EndItem height={339}/>
+                <EndItem height={400}/>
             </ScrollView>
         )
     }
