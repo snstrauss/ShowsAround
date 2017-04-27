@@ -48,7 +48,7 @@ class ShowsInCity extends Component {
             <View>
                 <Header title={this.props.navigation.state.params.cityName} 
                         goBack={this.props.navigation.goBack.bind(this)}/>
-                <ScrollView scrollEnabled={allShows.length >= 5}>
+                <ScrollView scrollEnabled={allShows.length >= 4}>
                     {
                         allShows.map((show) => {
                             
